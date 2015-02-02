@@ -1,0 +1,73 @@
+﻿<div ng-controller="TableController">
+    <div style="background: lightskyblue; padding-top: 8px; padding-bottom: 8px; margin-top: 5px;">
+        <h3 style="margin-left: 15px;">
+            <span class="glyphicon glyphicon-search"></span>&nbsp;
+                Filter or search:&nbsp;&nbsp;
+                <input type="text" ng-model="filterContent">
+        </h3>
+    </div>
+
+
+    <table id="infoTable" class="table table-striped tablesorter">
+        <thead>
+            <tr>
+                <th>Edit</th>
+                <th ng-click="showIcons('id'); predicate = 'id'; reverse=false">ID&nbsp;&nbsp;
+                        <span ng-show="showId"><span class="glyphicon glyphicon-sort-by-order"></span></span>
+                </th>
+                <th ng-click="showIcons('title'); predicate = 'title'; reverse=false">Title&nbsp;&nbsp;
+                        <span ng-show="showTitle"><span class="glyphicon glyphicon-sort-by-alphabet"></span></span>
+                </th>
+                <th ng-click="showIcons('fName'); predicate = 'fName'; reverse=false">First Name&nbsp;&nbsp;
+                        <span ng-show="showFName"><span class="glyphicon glyphicon-sort-by-alphabet"></span></span>
+                </th>
+                <th ng-click="showIcons('lName'); predicate = 'lName'; reverse=false">Last Name&nbsp;&nbsp;
+                        <span ng-show="showLName"><span class="glyphicon glyphicon-sort-by-alphabet"></span></span>
+                </th>
+                <th ng-click="showIcons('sex'); predicate = 'sex'; reverse=false">Sex&nbsp;&nbsp;
+                        <span ng-show="showSex"><span class="glyphicon glyphicon-sort-by-alphabet"></span></span>
+                </th>
+                <th ng-click="showIcons('age'); predicate = 'age'; reverse=false">Age&nbsp;&nbsp;
+                        <span ng-show="showAge"><span class="glyphicon glyphicon-sort-by-order"></span></span>
+                </th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in subUsers">
+                <td>
+                    <button class="btn btn-success">
+                        <a style="color: white;" ng-href='#/edit/{{user.id}}'><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit</a>
+                    </button>
+                </td>
+                <td>{{ user.id }}</td>
+                <td>{{ user.title }}</td>
+                <td>{{ user.fName }}</td>
+                <td>{{ user.lName }}</td>
+                <td>{{ user.sex }}</td>
+                <td>{{ user.age }}</td>
+                <td>
+                    <button class="btn btn-warning" ng-click="deleteUser(user.id)">
+                        <span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="text-right">
+        <button class="btn btn-info" ng-click="setPageNumber(1)">&nbsp;&nbsp;First&nbsp;&nbsp;</button>
+        <button class="btn btn-info" ng-click="setPageNumber(pageNumber-1)">&nbsp;&nbsp; &laquo; &nbsp;&nbsp;</button>
+        <span ng-repeat="p in pageNumArr">
+            <button class="btn btn-info" ng-click="setPageNumber(p.page)">&nbsp;&nbsp;{{ p.page }}&nbsp;&nbsp;</button>
+        </span>
+        <button class="btn btn-info" ng-click="setPageNumber(pageNumber+1)">&nbsp;&nbsp; &raquo; &nbsp;&nbsp;</button>
+        <button class="btn btn-info" ng-click="setPageNumber(numberOfPages)">&nbsp;&nbsp;Last&nbsp;&nbsp;</button>
+
+    </div>
+
+    <hr>
+    <button class="btn btn-success" ng-click="editUser(0)">
+        <a style="color: white;" ng-href='#/edit/0'><span class="glyphicon glyphicon-user"></span>&nbsp;Create New User</a>
+    </button>
+    <hr>
+</div>
